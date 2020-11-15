@@ -6,6 +6,7 @@ import Product from './components/Product';
 import ProductsList from './components/ProductsList';
 import Home from './components/Home.js';
 import ProductsContextProvider from './contexts/ProductsContext';
+import BasketContextProvider from './contexts/BasketContext';
 
 function App() {
   return (
@@ -14,10 +15,12 @@ function App() {
         <NavBar />
         <Switch>
           <ProductsContextProvider>
-            <Route exact path='/' component={Home}></Route>
-            <Route exact path='/products' component={ProductsList}></Route>
-            {/* <Route path='/products/:id' component={Product}></Route>
+            <BasketContextProvider>
+              <Route exact path='/' component={Home}></Route>
+              <Route exact path='/products' component={ProductsList}></Route>
+              {/* <Route path='/products/:id' component={Product}></Route>
             <Route path='/basket' component={Basket}></Route> */}
+            </BasketContextProvider>
           </ProductsContextProvider>
         </Switch>
       </Router>
