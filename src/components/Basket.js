@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { BasketContext } from '../contexts/BasketContext';
 
 const Basket = () => {
-  const { basket, dispatch } = useContext(BasketContext);
+  const { basket, deleteProduct } = useContext(BasketContext);
   return (
     <div>
       <h2>Basket</h2>
@@ -11,12 +11,7 @@ const Basket = () => {
           return (
             <div key={product.id}>
               {product.title} : {product.price}{' '}
-              <button
-                onClick={() => dispatch({ type: 'delete', id: product.id })}
-              >
-                {' '}
-                Delete{' '}
-              </button>
+              <button onClick={() => deleteProduct(product)}> Delete </button>
             </div>
           );
         })}

@@ -1,35 +1,32 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useState } from 'react';
 
 export const BasketContext = createContext();
 
 const BasketContextProvider = ({ children }) => {
-  const initialState = [];
+  const [basket, setBasket] = useState([]);
 
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case 'add':
-        return [
-          ...state,
-          { id: action.id, title: action.title, price: action.price },
-        ];
-      case 'delete':
-        let newState = state;
-        let index = newState
-          .map((product) => {
-            return product.id;
-          })
-          .indexOf(action.id);
-        newState.splice(index, 1);
-        return newState;
-      default:
-        return state;
-    }
+  const addProduct = (product) => {
+    setBasket((prevState) => {
+      return [
+        ...prevState,
+        { id: product.id, title: product.title, price: product.price },
+      ];
+    });
   };
 
-  const [basket, dispatch] = useReducer(reducer, initialState);
+  const deleteProduct = (product) => {
+    let newBasket = basket;
+    let index = newBasket
+      .map((product) => {
+        return product.id;
+      })
+      .indexOf(product.id);
+    newBasket.splice(index, 1);
+    setBasket(newBasket);
+  };
 
   return (
-    <BasketContext.Provider value={{ basket, dispatch }}>
+    <BasketContext.Provider value={{ basket, addProduct, deleteProduct }}>
       {children}
     </BasketContext.Provider>
   );

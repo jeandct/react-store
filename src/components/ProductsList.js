@@ -6,7 +6,7 @@ import './ProductsList.css';
 
 const ProductsLists = () => {
   const { catalogue, getCatalogue } = useContext(ProductsContext);
-  const { basket, dispatch } = useContext(BasketContext);
+  const { basket, addProduct } = useContext(BasketContext);
 
   useEffect(() => {
     getCatalogue();
@@ -18,18 +18,7 @@ const ProductsLists = () => {
         <div key={product.id} className='product-card'>
           <img src={product.image} alt={product.title} />
           <p>{product.price} €</p>
-          <button
-            onClick={() =>
-              dispatch({
-                type: 'add',
-                id: product.id,
-                title: product.title,
-                price: product.price,
-              })
-            }
-          >
-            Add to Basket
-          </button>
+          <button onClick={() => addProduct(product)}>Add to Basket</button>
         </div>
       );
     });
