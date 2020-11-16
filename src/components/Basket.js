@@ -10,7 +10,7 @@ const Basket = () => {
         {basket.map((product) => {
           return (
             <div key={product.id}>
-              {product.title} : {product.price}{' '}
+              {product.title} : {product.price} €{' '}
               <button onClick={() => deleteProduct(product)}> Delete </button>
             </div>
           );
