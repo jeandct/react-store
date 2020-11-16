@@ -14,14 +14,10 @@ const BasketContextProvider = ({ children }) => {
     });
   };
 
-  const deleteProduct = (product) => {
-    let newBasket = basket;
-    let index = newBasket
-      .map((product) => {
-        return product.id;
-      })
-      .indexOf(product.id);
-    newBasket.splice(index, 1);
+  const deleteProduct = (productToDelete) => {
+    let newBasket = basket.filter(
+      (product) => product.id !== productToDelete.id
+    );
     setBasket(newBasket);
   };
 
