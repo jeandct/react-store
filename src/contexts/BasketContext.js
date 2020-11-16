@@ -13,14 +13,8 @@ const BasketContextProvider = ({ children }) => {
           { id: action.id, title: action.title, price: action.price },
         ];
       case 'delete':
-        let newState = state;
-        let index = newState
-          .map((product) => {
-            return product.id;
-          })
-          .indexOf(action.id);
-        newState.splice(index, 1);
-        return newState;
+        return state.filter((product) => product.id !== action.id);
+
       default:
         return state;
     }
